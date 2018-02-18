@@ -32,9 +32,13 @@
 #include "stats.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 /* Size of the Data Set */
 #define SIZE (40)
+
+int compare_uint_descending(const void* a, const void* b);
+int compare_uint_ascending(const void* a, const void* b);
 
 void main() {
 
@@ -45,10 +49,13 @@ void main() {
                                 7,  87, 250, 230,  99,   3, 100,  90};
 
   print_array(test, SIZE);
+
+  print_statistics(test, SIZE);
 }
 
 //-----------------------------------------------------------------------------
 void print_statistics(unsigned char* data, unsigned int length) {
+  printf("Median value is: %u\n", find_median(data, length));
 }
 
 //-----------------------------------------------------------------------------
@@ -66,6 +73,17 @@ void print_array(unsigned char* data, unsigned int length) {
 
 //-----------------------------------------------------------------------------
 unsigned int find_median(unsigned char* data, unsigned int length) {
+  unsigned char sorted_data[length];
+
+  memcpy(sorted_data, data, length);
+  qsort(sorted_data, SIZE, sizeof(unsigned char), compare_uint_ascending);
+
+  // Use linear interpolation for even-sized data set
+  if (SIZE & 0x01) {
+    return sorted_data[SIZE / 2];
+  } else {
+    return (sorted_data[SIZE / 2 - 1] + sorted_data[SIZE / 2]) / 2;
+  }
 }
 
 //-----------------------------------------------------------------------------
@@ -81,7 +99,12 @@ unsigned int find_minimum(unsigned char* data, unsigned int length) {
 }
 
 //-----------------------------------------------------------------------------
-int compare_uints_descending(const void* a, const void* b) {
+void sort_array(unsigned char* data, unsigned int length) {
+  qsort(data, SIZE, sizeof(unsigned char), compare_uint_descending);
+}
+
+//-----------------------------------------------------------------------------
+int compare_uint_descending(const void* a, const void* b) {
   if (*(unsigned char*)a > *(unsigned char*)b) {
     return -1;
   }
@@ -90,6 +113,10 @@ int compare_uints_descending(const void* a, const void* b) {
 }
 
 //-----------------------------------------------------------------------------
-void sort_array(unsigned char* data, unsigned int length) {
-  qsort(data, SIZE, sizeof(unsigned char), compare_uints_descending);
+int compare_uint_ascending(const void* a, const void* b) {
+  if (*(unsigned char*)a < *(unsigned char*)b) {
+    return -1;
+  }
+
+  return *(unsigned char*)a > *(unsigned char*)b;
 }
