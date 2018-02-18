@@ -29,10 +29,9 @@
  *
  */
 
-
-
-#include <stdio.h>
 #include "stats.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 /* Size of the Data Set */
 #define SIZE (40)
@@ -45,10 +44,7 @@ void main() {
                               201,   6,  12,  60,   8,   2,   5,  67,
                                 7,  87, 250, 230,  99,   3, 100,  90};
 
-  /* Other Variable Declarations Go Here */
-  /* Statistics and Printing Functions Go Here */
   print_array(test, SIZE);
-
 }
 
 //-----------------------------------------------------------------------------
@@ -85,5 +81,15 @@ unsigned int find_minimum(unsigned char* data, unsigned int length) {
 }
 
 //-----------------------------------------------------------------------------
+int compare_uints_descending(const void* a, const void* b) {
+  if (*(unsigned char*)a > *(unsigned char*)b) {
+    return -1;
+  }
+
+  return *(unsigned char*)a < *(unsigned char*)b;
+}
+
+//-----------------------------------------------------------------------------
 void sort_array(unsigned char* data, unsigned int length) {
+  qsort(data, SIZE, sizeof(unsigned char), compare_uints_descending);
 }
