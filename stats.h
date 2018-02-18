@@ -11,7 +11,7 @@
 /**
  * @file stats.h
  * @brief Calculates and prints various statistics on an array-structured data
- *      set. Prints data set in sorted and unsorted order.
+ *      set and prints data set in sorted order.
  *
  * This module takes as input a data set structured as an array, calculates
  * several statistics on the data set, and prints the results to the screen.
@@ -22,7 +22,7 @@
  *    -Minimum
  *
  * In addition, the array data set will also be printed to the screen in
- * unsorted order as well as descending sorted order.
+ * descending sorted order.
  *
  * @author Charles De Cuir
  * @date Created February 17 2018, Edited February 17 2018
@@ -35,12 +35,11 @@
  * @brief Prints all calculated statistics.
  *
  * Prints the following to the screen:
- *   -The values in the data set (unsorted)
  *   -The median value of the data set
  *   -The mean value of the data set
  *   -The maximum value of the data set
  *   -The minimum value of the data set
- *   -The data set in descending order
+ *   -The data set in descending sorted order
  *
  * @param data Pointer to the input data set
  * @param length Length of the data set

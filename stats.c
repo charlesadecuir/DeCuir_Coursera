@@ -11,7 +11,7 @@
 /**
  * @file stats.c
  * @brief Calculates and prints various statistics on an array-structured data
- *      set. Prints data set in sorted and unsorted order.
+ *      set and prints data set in sorted order.
  *
  * This module takes as input a data set structured as an array, calculates
  * several statistics on the data set, and prints the results to the screen.
@@ -22,7 +22,7 @@
  *    -Minimum
  *
  * In addition, the array data set will also be printed to the screen in
- * unsorted order as well as descending sorted order.
+ * descending sorted order.
  *
  * @author Charles De Cuir
  * @date Created February 17 2018, Edited February 17 2018
@@ -37,8 +37,8 @@
 /* Size of the Data Set */
 #define SIZE (40)
 
-int compare_uint_descending(const void* a, const void* b);
 int compare_uint_ascending(const void* a, const void* b);
+int compare_uint_descending(const void* a, const void* b);
 
 void main() {
 
@@ -48,17 +48,25 @@ void main() {
                               201,   6,  12,  60,   8,   2,   5,  67,
                                 7,  87, 250, 230,  99,   3, 100,  90};
 
-  print_array(test, SIZE);
-
   print_statistics(test, SIZE);
 }
 
 //-----------------------------------------------------------------------------
 void print_statistics(unsigned char* data, unsigned int length) {
-  printf("Median value is: %u\n", find_median(data, length));
-  printf("Mean value is: %u\n", find_mean(data, length));
-  printf("Max value is: %u\n", find_maximum(data, length));
-  printf("Min value is: %u\n", find_minimum(data, length));
+  printf("--------------------------------------------------\n");
+  printf("|              Data Set Statistics               |\n");
+  printf("--------------------------------------------------\n");
+  printf("\tMedian:\n\t\t%u\n", find_median(data, length));
+  printf("\tMean:\n\t\t%u\n", find_mean(data, length));
+  printf("\tMax:\n\t\t%u\n", find_maximum(data, length));
+  printf("\tMin:\n\t\t%u\n", find_minimum(data, length));
+
+  sort_array(data, length);
+
+  printf("\nSorted Data Set (Descending):\n\t");
+  print_array(data, length);
+
+
 }
 
 //-----------------------------------------------------------------------------
@@ -79,13 +87,13 @@ unsigned int find_median(unsigned char* data, unsigned int length) {
   unsigned char sorted_data[length];
 
   memcpy(sorted_data, data, length);
-  qsort(sorted_data, SIZE, sizeof(unsigned char), compare_uint_ascending);
+  qsort(sorted_data, length, sizeof(unsigned char), compare_uint_ascending);
 
   // Use linear interpolation for even-sized data set
-  if (SIZE & 0x01) {
-    return sorted_data[SIZE / 2];
+  if (length & 0x01) {
+    return sorted_data[length / 2];
   } else {
-    return (sorted_data[SIZE / 2 - 1] + sorted_data[SIZE / 2]) / 2;
+    return (sorted_data[length / 2 - 1] + sorted_data[length / 2]) / 2;
   }
 }
 
@@ -128,7 +136,7 @@ unsigned int find_minimum(unsigned char* data, unsigned int length) {
 
 //-----------------------------------------------------------------------------
 void sort_array(unsigned char* data, unsigned int length) {
-  qsort(data, SIZE, sizeof(unsigned char), compare_uint_descending);
+  qsort(data, length, sizeof(unsigned char), compare_uint_descending);
 }
 
 //-----------------------------------------------------------------------------
@@ -148,5 +156,3 @@ int compare_uint_descending(const void* a, const void* b) {
 
   return *(unsigned char*)a < *(unsigned char*)b;
 }
-
-

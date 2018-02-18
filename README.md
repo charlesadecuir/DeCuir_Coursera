@@ -1,7 +1,7 @@
 # Stats
 
 Calculates and prints various statistics on an array-structured data
-set. Prints data set in sorted and unsorted order.
+set. Prints data set in sorted order.
 
 Coursera C1M1 assessment from Introduction To Embedded Systems.
 
