@@ -56,6 +56,7 @@ void main() {
 //-----------------------------------------------------------------------------
 void print_statistics(unsigned char* data, unsigned int length) {
   printf("Median value is: %u\n", find_median(data, length));
+  printf("Mean value is: %u\n", find_mean(data, length));
 }
 
 //-----------------------------------------------------------------------------
@@ -88,6 +89,13 @@ unsigned int find_median(unsigned char* data, unsigned int length) {
 
 //-----------------------------------------------------------------------------
 unsigned int find_mean(unsigned char* data, unsigned int length) {
+  unsigned int sum = 0;
+
+  for (int i = 0; i < length; i++) {
+    sum += data[i];
+  }
+
+  return sum / length;
 }
 
 //-----------------------------------------------------------------------------
