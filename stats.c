@@ -9,13 +9,23 @@
  *
  *****************************************************************************/
 /**
- * @file <Add File Name> 
- * @brief <Add Brief Description Here >
+ * @file stats.c
+ * @brief Calculates and prints various statistics on an array-structured data
+ *      set. Prints data set in sorted and unsorted order.
  *
- * <Add Extended Description Here>
+ * This module takes as input a data set structured as an array, calculates
+ * several statistics on the data set, and prints the results to the screen.
+ * Calculated statistics include:
+ *    -Median
+ *    -Mean
+ *    -Maximum
+ *    -Minimum
  *
- * @author <Add FirsName LastName>
- * @date <Add date >
+ * In addition, the array data set will also be printed to the screen in
+ * unsorted order as well as descending sorted order.
+ *
+ * @author Charles De Cuir
+ * @date Created February 17 2018, Edited February 17 2018
  *
  */
 
@@ -40,4 +50,30 @@ void main() {
 
 }
 
-/* Add other Implementation File Code Here */
+//-----------------------------------------------------------------------------
+void print_statistics(unsigned char* data, unsigned int length) {
+}
+
+//-----------------------------------------------------------------------------
+void print_array(unsigned char* data, unsigned int length) {
+}
+
+//-----------------------------------------------------------------------------
+unsigned int find_median(unsigned char* data, unsigned int length) {
+}
+
+//-----------------------------------------------------------------------------
+unsigned int find_mean(unsigned char* data, unsigned int length) {
+}
+
+//-----------------------------------------------------------------------------
+unsigned int find_maximum(unsigned char* data, unsigned int length) {
+}
+
+//-----------------------------------------------------------------------------
+unsigned int find_minimum(unsigned char* data, unsigned int length) {
+}
+
+//-----------------------------------------------------------------------------
+void sort_array(unsigned char* data, unsigned int length) {
+}
