@@ -57,6 +57,8 @@ void main() {
 void print_statistics(unsigned char* data, unsigned int length) {
   printf("Median value is: %u\n", find_median(data, length));
   printf("Mean value is: %u\n", find_mean(data, length));
+  printf("Max value is: %u\n", find_maximum(data, length));
+  printf("Min value is: %u\n", find_minimum(data, length));
 }
 
 //-----------------------------------------------------------------------------
@@ -100,15 +102,42 @@ unsigned int find_mean(unsigned char* data, unsigned int length) {
 
 //-----------------------------------------------------------------------------
 unsigned int find_maximum(unsigned char* data, unsigned int length) {
+  unsigned int max = data[0];
+
+  for (int i = 1; i < length; i++) {
+    if (data[i] > max) {
+      max = data[i];
+    }
+  }
+
+  return max;
 }
 
 //-----------------------------------------------------------------------------
 unsigned int find_minimum(unsigned char* data, unsigned int length) {
+  unsigned int min = data[0];
+
+  for (int i = 1; i < length; i++) {
+    if (data[i] < min) {
+      min = data[i];
+    }
+  }
+
+  return min;
 }
 
 //-----------------------------------------------------------------------------
 void sort_array(unsigned char* data, unsigned int length) {
   qsort(data, SIZE, sizeof(unsigned char), compare_uint_descending);
+}
+
+//-----------------------------------------------------------------------------
+int compare_uint_ascending(const void* a, const void* b) {
+  if (*(unsigned char*)a < *(unsigned char*)b) {
+    return -1;
+  }
+
+  return *(unsigned char*)a > *(unsigned char*)b;
 }
 
 //-----------------------------------------------------------------------------
@@ -120,11 +149,4 @@ int compare_uint_descending(const void* a, const void* b) {
   return *(unsigned char*)a < *(unsigned char*)b;
 }
 
-//-----------------------------------------------------------------------------
-int compare_uint_ascending(const void* a, const void* b) {
-  if (*(unsigned char*)a < *(unsigned char*)b) {
-    return -1;
-  }
 
-  return *(unsigned char*)a > *(unsigned char*)b;
-}
