@@ -47,6 +47,7 @@ void main() {
 
   /* Other Variable Declarations Go Here */
   /* Statistics and Printing Functions Go Here */
+  print_array(test, SIZE);
 
 }
 
@@ -56,6 +57,15 @@ void print_statistics(unsigned char* data, unsigned int length) {
 
 //-----------------------------------------------------------------------------
 void print_array(unsigned char* data, unsigned int length) {
+  printf("[");
+  for (int i = 0; i < length; i++) {
+    printf("%u", data[i]);
+
+    if (i < (length-1)) {
+      printf(", ");
+    }
+  }
+  printf("]\n");
 }
 
 //-----------------------------------------------------------------------------
