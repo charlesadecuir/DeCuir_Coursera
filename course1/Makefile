@@ -28,7 +28,7 @@
 #
 #------------------------------------------------------------------------------
 
-TARGET = c1m2
+TARGET = c1fa
 
 # Platform Overrides
 PLATFORM = HOST
@@ -58,8 +58,8 @@ $(error "Unsupported platform")
 endif
 
 # Compiler Flags and Defines
-CFLAGS   = -Wall -Werror -g -O0 -std=c99 -D$(PLATFORM) -MMD
-LDFLAGS  = -Wl,-Map=c1m2.map
+CFLAGS   = -Wall -Werror -g -O0 -std=c99 -D$(PLATFORM) -MMD -DVERBOSE -DCOURSE1
+LDFLAGS  = -Wl,-Map=$(TARGET).map
 CPPFLAGS = $(INCLUDES)
 
 ifeq ($(PLATFORM),HOST)

@@ -30,6 +30,7 @@
  */
 
 #include "stats.h"
+#include "platform.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -39,31 +40,33 @@ int compare_uint_descending(const void* a, const void* b);
 
 //-----------------------------------------------------------------------------
 void print_statistics(unsigned char* data, unsigned int length) {
-  printf("--------------------------------------------------\n");
-  printf("|              Data Set Statistics               |\n");
-  printf("--------------------------------------------------\n");
-  printf("\tMedian:\n\t\t%u\n", find_median(data, length));
-  printf("\tMean:\n\t\t%u\n", find_mean(data, length));
-  printf("\tMax:\n\t\t%u\n", find_maximum(data, length));
-  printf("\tMin:\n\t\t%u\n", find_minimum(data, length));
+  PRINTF("--------------------------------------------------\n");
+  PRINTF("|              Data Set Statistics               |\n");
+  PRINTF("--------------------------------------------------\n");
+  PRINTF("\tMedian:\n\t\t%u\n", find_median(data, length));
+  PRINTF("\tMean:\n\t\t%u\n", find_mean(data, length));
+  PRINTF("\tMax:\n\t\t%u\n", find_maximum(data, length));
+  PRINTF("\tMin:\n\t\t%u\n", find_minimum(data, length));
 
   sort_array(data, length);
 
-  printf("\nSorted Data Set (Descending):\n\t");
+  PRINTF("\nSorted Data Set (Descending):\n\t");
   print_array(data, length);
 }
 
 //-----------------------------------------------------------------------------
 void print_array(unsigned char* data, unsigned int length) {
-  printf("[");
+#ifdef VERBOSE
+  PRINTF("[");
   for (int i = 0; i < length; i++) {
-    printf("%u", data[i]);
+    PRINTF("%u", data[i]);
 
     if (i < (length-1)) {
-      printf(", ");
+      PRINTF(", ");
     }
   }
-  printf("]\n");
+  PRINTF("]\n");
+#endif
 }
 
 //-----------------------------------------------------------------------------
