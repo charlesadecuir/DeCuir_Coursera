@@ -113,4 +113,5 @@ $(TARGET).out: $(OBJS)
 # Remove Generated Files
 .PHONY: clean
 clean:
+	# Platform dependent clean
 	rm -f $(PPS) $(ASMS) $(OBJS) $(DEPS) $(TARGET).out $(TARGET).map $(TARGET).asm

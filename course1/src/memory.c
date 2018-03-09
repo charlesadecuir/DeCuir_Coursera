@@ -27,36 +27,105 @@
 ***********************************************************/
 //------------------------------------------------------------------------------
 uint8_t * my_memmove(uint8_t * src, uint8_t * dst, size_t length) {
-  return 0;
+  // Save pointer to dst.
+  uint8_t* dst_start = dst;
+  uint8_t* tmp;
+
+  // Allocate temporary swap space if pointers overlap.
+  if ((src >= dst && (src + length) >= dst) ||
+      (dst >= src && (dst + length) >= src)) {
+    tmp = (uint8_t*) malloc(length * sizeof(uint8_t));
+  }
+
+  // Use swap to move memory contents if necessary, otherwise
+  // do a direct copy.
+  if (tmp != NULL) {
+    uint8_t* tmp_start = tmp;
+    for (uint32_t i = 0; i < length; i++) {
+      *tmp++ = *src++;
+    }
+
+    tmp = tmp_start;
+
+    for (uint32_t i = 0; i < length; i++) {
+      *dst++ = *tmp++;
+    }
+  }
+  else {
+    for (uint32_t i = 0; i < length; i++) {
+      *dst++ = *src++;
+    }
+  }
+
+  return dst_start;
 }
 
 //------------------------------------------------------------------------------
 uint8_t * my_memcopy(uint8_t * src, uint8_t * dst, size_t length) {
-  return 0;
+  // Save pointer to dst.
+  uint8_t* dst_start = dst;
+
+  // Directly copy data from src to dst.
+  for (uint32_t i = 0; i < length; i++) {
+    *dst++ = *src++;
+  }
+
+  return dst_start;
 }
 
 //------------------------------------------------------------------------------
 uint8_t * my_memset(uint8_t * src, size_t length, uint8_t value) {
-  return 0;
+  // Save pointer to src.
+  uint8_t* src_start = src;
+
+  // Set each byte individually to the given value.
+  for (uint32_t i = 0; i < length; i++) {
+    *src++ = value;
+  }
+
+  return src_start;
 }
 
 //------------------------------------------------------------------------------
 uint8_t * my_memzero(uint8_t * src, size_t length) {
-  return 0;
+  // Save pointer to src.
+  uint8_t* src_start = src;
+
+  // Set each byte individually to zero.
+  for (uint32_t i = 0; i < length; i++) {
+    *src++ = 0u;
+  }
+
+  return src_start;
 }
 
 //------------------------------------------------------------------------------
 uint8_t * my_reverse(uint8_t * src, size_t length) {
-  return 0;
+  // Save pointer to src stard and end.
+  uint8_t* src_start = src;
+  uint8_t* src_end = src + length - 1;
+  uint8_t tmp;
+
+  // Swap each byte starting at the ends working inward.
+  for (; src <= src_end; src++,src_end--) {
+    tmp = *src;
+    *src = *src_end;
+    *src_end = tmp;
+  }
+
+  return src_start;
 }
 
 //------------------------------------------------------------------------------
 int32_t * reserve_words(size_t length) {
-  return 0;
+  // Malloc 32-bit words.
+  return (int32_t*) malloc(length * sizeof(int32_t));
 }
 
 //------------------------------------------------------------------------------
 void free_words(uint32_t * src) {
+  // Free given pointer.
+  free(src);
   return;
 }
 

@@ -10,7 +10,7 @@
  *****************************************************************************/
 /**
  * @file memory.h
- * @brief Abstraction of memory read and write operations
+ * @brief Abstraction of memory read and write operations.
  *
  * This header file provides an abstraction of reading and
  * writing to memory via function calls. 

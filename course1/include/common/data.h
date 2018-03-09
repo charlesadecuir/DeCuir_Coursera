@@ -16,6 +16,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 
+// Enum for radix definitions 2 to 16.
 typedef enum {
   BASE_2 = 2,
   BASE_3,
@@ -42,25 +43,24 @@ typedef enum {
  * 2 to 16.
  *
  * @param data Integer to convert
- * @param ptr Pointer to converted ASCII string
- * @param base Numerical base (radix) of integer to convert
+ * @param ptr Pointer to the converted ASCII string
+ * @param base Numerical base (radix) of integer
  *
  * @return The length of the converted data.
  */
 uint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base);
 
 /**
- * @brief Convert integer to ASCII.
+ * @brief Convert ASCII to integer.
  *
- * Converts data from a standard integer type into
- * a null-terminated ASCII string. Supports bases
- * 2 to 16.
+ * Converts data from an ASCII string
+ * to an integer type. Supports bases 2 to 16.
  *
- * @param data Integer to convert
- * @param ptr Pointer to converted ASCII string
- * @param base Numerical base (radix) of integer to convert
+ * @param ptr Pointer to ASCII string to convert
+ * @param digits Number of digits to be converted
+ * @param base Numerical base (radix) of integer
  *
- * @return The length of the converted data.
+ * @return The converted integer
  */
 int32_t my_atoi(uint8_t * ptr, uint8_t digits, uint32_t base);
 
